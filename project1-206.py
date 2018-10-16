@@ -34,7 +34,23 @@ def getData(file):
 
 	pass
 
+
 def mySort(data,col):
+	lst = []
+	itemLst = []
+	for x in range(len(data)):
+		item = data[col]
+		lst.append(item)
+		valLst = list(x.values())
+		itemLst.append(valLst)
+	lst.sort()
+	firstItem = lst[0]
+	for x in range(len(itemLst)):
+		if firstItem in x == True:
+			first = x[0]
+			last = x[1]
+	print(first)
+
 # Sort based on key/column
 #Input: list of dictionaries and col (key) to sort on
 #Output: Return the first item in the sorted list as a string of just: firstName lastName
