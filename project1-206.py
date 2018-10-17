@@ -1,5 +1,6 @@
 import os
 import filecmp
+import operator
 from dateutil.relativedelta import *
 from datetime import date
 
@@ -63,6 +64,33 @@ def classSizes(data):
 # Input: list of dictionaries
 # Output: Return a list of tuples sorted by the number of students in that class in
 # descending order
+lst = []
+sr = 0
+jr = 0
+so = 0
+fr = 0
+for x in range(len(data)):
+	year = x['class']
+	if year == 'Senior':
+		sr = 1 + sr
+	elif year == 'Junior':
+		jr = 1 + jr
+	elif year == "Sophomore":
+		so = 1 + so
+	else:
+		fr = 1 + fr
+#make tuples
+srCount = ("Senior", sr)
+jrCount = ("Junior", jr)
+soCount = ("Sophomore", so)
+frCount = ("Freshman", fr)
+
+lst.append(srCount)
+lst.append(jrCount)
+lst.append(soCount)
+lst.append(frCount)
+
+lst.sort(key = operator.itemgetter(1), reverse=True)
 # [('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)]
 
 	pass
