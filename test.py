@@ -33,7 +33,7 @@ def getData(file):
 #Ouput: return a list of dictionary objects where
 #the keys are from the first row in the data. and the values are each of the other rows
 
-	pass
+	#pass
 
 
 def mySort(data,col):
@@ -86,4 +86,24 @@ def classSizes(data):
 	lst.sort(key = operator.itemgetter(1), reverse=True)
 	# [('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)]
 
-	pass
+	#pass
+
+	def findMonth(a):
+		lst = []
+		mode = 0
+		for x in range(len(a)):
+			DOB = a['DOB']
+			DOBlst = list(DOB)
+			month = DOBlst[0]
+			lst.append(month)
+		for x in range(1,13):
+			count = lst.count(x)
+			if count > mode:
+				mode = count
+		return mode
+	# Find the most common birth month form this data
+	# Input: list of dictionaries
+	# Output: Return the month (1-12) that had the most births in the data
+
+	data = getData(P1DataB.csv)
+	print(data)

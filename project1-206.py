@@ -97,6 +97,18 @@ lst.sort(key = operator.itemgetter(1), reverse=True)
 
 
 def findMonth(a):
+	lst = []
+	mode = 0
+	for x in range(len(a)):
+		DOB = a['DOB']
+		DOBlst = list(DOB)
+		month = DOBlst[0]
+		lst.append(month)
+	for x in range(1,13):
+		count = lst.count(x)
+		if count > mode:
+			mode = count
+	return mode
 # Find the most common birth month form this data
 # Input: list of dictionaries
 # Output: Return the month (1-12) that had the most births in the data
