@@ -1,6 +1,7 @@
 import os
 import filecmp
 import operator
+import re
 from dateutil.relativedelta import *
 from datetime import date
 
@@ -47,12 +48,14 @@ def mySort(data,col):
 		itemLst.append(valLst)
 	lst.sort()
 	firstItem = lst[0]
-	print(firstItem)
-	print('first' in itemLst)
-	for x in range(len(itemLst)):
-		lst1 = itemLst[x]
-		lst1.split(',')
-		#have to create a nested list; right now it's just a signle string
+	for x in range(len(data)):
+		#lst1 = []
+		dic = data[x]
+		vals = list(dic.values())
+		bl = firstItem in vals
+		if bl == True:
+			name = dic['first'] + dic['last']
+			return name
 
 def classSizes(data):
 # Create a histogram
@@ -65,7 +68,8 @@ def classSizes(data):
 	so = 0
 	fr = 0
 	for x in range(len(data)):
-		year = x['class']
+		dic = data[x]
+		year = dic['class']
 		if year == 'Senior':
 			sr = 1 + sr
 		elif year == 'Junior':
@@ -86,28 +90,93 @@ def classSizes(data):
 	lst.append(frCount)
 
 	lst.sort(key = operator.itemgetter(1), reverse=True)
+	return lst
 	# [('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)]
 
 	#pass
 
-	def findMonth(a):
-		lst = []
-		mode = 0
-		for x in range(len(a)):
-			DOB = a['DOB']
-			DOBlst = list(DOB)
-			month = DOBlst[0]
-			lst.append(month)
-		for x in range(1,13):
-			count = lst.count(x)
-			if count > mode:
-				mode = count
-		return mode
+def findMonth(a):
+	lst = []
+	jan = 0
+	feb = 0
+	mar = 0
+	apr = 0
+	may = 0
+	jun = 0
+	jul = 0
+	aug = 0
+	sep = 0
+	octob = 0
+	nov = 0
+	dec = 0
+	oops = 0
+	for x in range(len(a)):
+		dic = a[x]
+		DOB = dic['DOB']
+		lst.append(DOB)
+	months = []
+	for x in range(len(lst)):
+		date = lst[x]
+		monthLst = re.findall(r'^1?[0-9]',date)
+		if len(monthLst) > 0:
+			month = monthLst[0]
+			months.append(month)
+	for x in range(len(months)):
+		month = months[x]
+		if month == '1':
+			jan = jan + 1
+		elif month == '2':
+			feb = feb + 1
+		elif month == '3':
+			mar = mar + 1
+		elif month == '4':
+			apr = apr + 1
+		elif month == '5':
+			may = may + 1
+		elif month == '6':
+			jun = jun + 1
+		elif month == '7':
+			jul = jul + 1
+		elif month == '8':
+			aug = aug + 1
+		elif month == '9':
+			sep = sep + 1
+		elif month == '10':
+			octob = octob + 1
+		elif month == '11':
+			nov = nov + 1
+		elif month == '12':
+			dec = dec + 1
+		else:
+			oops = oops + 1
+	mode = max(jan,feb,mar,apr,may,jun,jul,aug,sep,octob,nov,dec)
+	if mode == jan:
+		print('1')
+	if mode == feb:
+		print('2')
+	if mode == mar:
+		print('3')
+	if mode == apr:
+		print('4')
+	if mode == may:
+		print('5')
+	if mode == jun:
+		print('6')
+	if mode == jul:
+		print('7')
+	if mode == aug:
+		print('8')
+	if mode == sep:
+		print('9')
+	if mode == octob:
+		print('10')
+	if mode == nov:
+		print('11')
+	if mode == dec:
+		print('12')
 	# Find the most common birth month form this data
 	# Input: list of dictionaries
 	# Output: Return the month (1-12) that had the most births in the data
 
-data = getData('P1DataA.csv')
-
-sort = mySort(data, 'first')
-print(sort)
+data = getData('P1DataB2.csv')
+findMonth(data)
