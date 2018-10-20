@@ -16,7 +16,7 @@ def getData(file):
 	for line in lines:
 		dic = {}
 
-		values = line.split(":")
+		values = line.split(",")
 		first = values[0]
 		last = values[1]
 		email = values[2]
@@ -40,17 +40,19 @@ def mySort(data,col):
 	lst = []
 	itemLst = []
 	for x in range(len(data)):
-		item = data[col]
+		dic = data[x]
+		item = dic[col]
 		lst.append(item)
-		valLst = list(x.values())
+		valLst = list(dic.values())
 		itemLst.append(valLst)
 	lst.sort()
 	firstItem = lst[0]
+	print(firstItem)
+	print('first' in itemLst)
 	for x in range(len(itemLst)):
-		if firstItem in x == True:
-			first = x[0]
-			last = x[1]
-	print(first)
+		lst1 = itemLst[x]
+		lst1.split(',')
+		#have to create a nested list; right now it's just a signle string
 
 def classSizes(data):
 # Create a histogram
@@ -105,5 +107,7 @@ def classSizes(data):
 	# Input: list of dictionaries
 	# Output: Return the month (1-12) that had the most births in the data
 
-	data = getData(P1DataB.csv)
-	print(data)
+data = getData('P1DataA.csv')
+
+sort = mySort(data, 'first')
+print(sort)
