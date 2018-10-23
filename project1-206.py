@@ -5,7 +5,7 @@ import re
 from dateutil.relativedelta import *
 from datetime import date
 
-
+#test
 def getData(file):
 # get a list of dictionary objects from the file
 	file = open(file, 'r') #Input: file name
