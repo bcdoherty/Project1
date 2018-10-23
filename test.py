@@ -178,5 +178,36 @@ def findMonth(a):
 	# Input: list of dictionaries
 	# Output: Return the month (1-12) that had the most births in the data
 
+def mySortPrint(a,col,fileName):
+	lst = []
+	itemLst = []
+	for x in range(len(a)):
+		dic = a[x]
+		item = dic[col]
+		lst.append(item)
+		valLst = list(dic.values())
+		itemLst.append(valLst)
+	lst.sort()
+	firstItem = lst[0]
+	for x in range(len(a)):
+		#lst1 = []
+		dic = a[x]
+		vals = list(dic.values())
+		bl = firstItem in vals
+		if bl == True:
+			first = dic['first']
+			last = dic['last']
+			email = dic['email']
+			string = first + ", " + last + ", " + email
+	outFile = open(fileName, "w")
+	outFile.write(string)
+	outFile.close()
+
+
+
+
+
+
+
 data = getData('P1DataB2.csv')
-findMonth(data)
+mySortPrint(data,'first','outFile.csv')
